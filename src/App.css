@@ -1,6 +1,11 @@
-.App {
-  text-align: center;
+
+
+body	{
+    text-align: center;
+  background:url(https://images.pexels.com/photos/399161/pexels-photo-399161.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) top right no-repeat;
+  background-attachment:fixed;
 }
+
 
 .App-header {
   font-family: gill-sans-nova, sans-serif;
@@ -31,5 +36,49 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+.makeups {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.makeup {
+  background-color: #efefef;
+
+  border-radius: 0.35em;
+  padding: 5px 25px 10px 25px;
+  max-width: 25%;
+  margin: 10px;
+  -moz-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+-webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+}
+
+img {
+
+  width: 200px;
+}
+
+@media screen and (min-width: 694px) and (max-width: 915px) {
+  .movie {
+    max-width: 33%;
+  }
+}
+@media screen and (min-width: 652px) and (max-width: 693px) {
+  .movie {
+    max-width: 50%;
+  }
+}
+@media screen and (max-width: 651px) {
+  .movie {
+    max-width: 100%;
+    margin: auto;
   }
 }

@@ -5,7 +5,8 @@ import Makeup from "./Makeup";
 import spinner from "../large-ajax-loader.gif";
 import SearchForm from "./SearchForm";
 
-const MAKEUP_API_URL = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=colourpop"
+// this is just a default call so that there are some products on the page when it first loads
+const MAKEUP_API_URL = "http://makeup-api.herokuapp.com/api/v1/products.json?product_tags=Vegan"
 
 const initialState = {
   loading: true,
@@ -34,6 +35,7 @@ const reducer = (state, action) => {
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+// load initial api call
   useEffect(() => {
     fetch(MAKEUP_API_URL)
       .then(response => response.json())
@@ -45,18 +47,14 @@ const App = () => {
       });
   }, []);
 
-  // you can add this to the onClick listener of the Header component
-  // const refreshPage = () => {
-  //   window.location.reload();
-  // };
-
+// search function with two options
   const search = (searchValue, dropdownValue) => {
     console.log(searchValue, dropdownValue);
     dispatch({
       type: "SEARCH_MAKEUPS_REQUEST"
     });
 
-    fetch(`http://makeup-api.herokuapp.com/api/v1/products.json?brand=${searchValue}`)
+    fetch(`http://makeup-api.herokuapp.com/api/v1/products.json?${dropdownValue}=${searchValue}`)
       .then(response => response.json())
       .then(makeupData => {
         if (makeupData.length > 0) {
@@ -76,11 +74,14 @@ const App = () => {
 
       <p className="App-intro">Explore thousands of products <br></br>from the world's top beauty brands!</p>
       <SearchForm search={search} />
-      <div className="makeup">
+      <div className="makeups">
         {loading ? (
           <img className="spinner" src={spinner} alt="Loading spinner" />
         ) : (
-          makeup.map((makeup) => ( <Makeup key={makeup.id} makeup={makeup} />
+          makeup.map((makeup) => (
+            <Makeup
+              key={makeup.id}
+              makeup={makeup} />
           ))
         )}
       </div>
